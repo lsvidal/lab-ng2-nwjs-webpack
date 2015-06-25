@@ -12,27 +12,16 @@ This project will develop a working build system for a Angular 2 application run
 
 1. Add NW.js using (https://github.com/lsvidal/lab-ng2-nwjs)
 
-## Configuration
+## Following Angular 2 Quickstart
 
-### TSD config
-
-To run _tsd_ it is necessary to create the file _.tsdrc_ in home directory with the following parameters:
+Configure TSD to run behind a corporate proxy by creating the file _.tsdrc_ in home directory with the following content:
 ```
 {
-	"proxy": "http://localhost:3940",
+	"proxy": "*host*:*port*",
 	"strictSSl": false
 }
 ```
 
-### Command line commands
+Run TSC directly in command line using `tsc --watch -m commonjs -t es5 --emitDecoratorMetadata app.ts`
 
-It is necessary to download declaration files for es6-loader, rx and rx-lite to stop tsc complaining about unresolved references. The full list of commands is: 
-
-```
-	npm install tsd -g
-
-	tsd query angular2 --action install --verbose --save
-	tsd query es6-loader --action install --verbose --save
-	tsd query rx --action install --verbose --save
-	tsd query rx-lite --action install --verbose --save
-```
+Use http-server to see the results. Following the basic tutorial, TSC will emit some warnings about not finding references to *es6-promise* and *rx* but will compile a runnable app. The tutorial only tells to install *angular2* reference using TSD: `tsd query angular2 --action install --verbose --save`. So running the following command is necessary to resolve the warnings: `tsd query es6-promise rx rx-lite --action install --verbose --save`. *rx-lite* is added because it is referenced after installing the first two.
