@@ -22,6 +22,14 @@ Configure TSD to run behind a corporate proxy by creating the file _.tsdrc_ in h
 }
 ```
 
-Run TSC directly in command line using `tsc --watch -m commonjs -t es5 --emitDecoratorMetadata app.ts`
+Run **tsc** directly in command line using `tsc --watch -m commonjs -t es5 --emitDecoratorMetadata app.ts`
 
 Use http-server to see the results. Following the basic tutorial, TSC will emit some warnings about not finding references to *es6-promise* and *rx* but will compile a runnable app. The tutorial only tells to install *angular2* reference using TSD: `tsd query angular2 --action install --verbose --save`. So running the following command is necessary to resolve the warnings: `tsd query es6-promise rx rx-lite --action install --verbose --save`. *rx-lite* is added because it is referenced after installing the first two.
+
+## Intermediate step 1
+
+The application files were moved into a specific directory to be separated from build files. I still want to call **tsc** from base directory which broke typing reference in app.ts file. The solution was moving **tsc** configuration into _tsconfig.json_ file with the proper paths to source and typings. Now **tsc** as `tsc --watch`.
+
+Notes:
+* **tsc** with **watch** autodetects changes in *tsconfig.json*.
+* Declaring typings in files list of **tsc** configuration seems to eliminate the nedde to declare reference paths in ts files.
