@@ -17,7 +17,7 @@ This project will develop a working build system for a Angular 2 application run
 Configure TSD to run behind a corporate proxy by creating the file _.tsdrc_ in home directory with the following content:
 ```
 {
-	"proxy": "*host*:*port*",
+	"proxy": "_<host>_:_<port>_",
 	"strictSSl": false
 }
 ```
