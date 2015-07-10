@@ -1,0 +1,39 @@
+{
+  "name": "lab-ng2-nwjs-webpack",
+  "version": "1.0.0",
+  "description": "Lab to test a webpack/gulp build environment for an Angular 2 application run on NW.js ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/lsvidal/lab-ng2-nwjs-webpack.git"
+  },
+  "keywords": [
+    "angular2",
+    "gulp",
+    "nwjs",
+    "webpack",
+    "typescript"
+  ],
+  "author": "Leonardo Vidal <leonardo73vidal@gmail.com> (lsvidal.github.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lsvidal/lab-ng2-nwjs-webpack/issues"
+  },
+  "homepage": "https://github.com/lsvidal/lab-ng2-nwjs-webpack#readme",
+  "devDependencies": {
+    "gulp-util": "^3.0.6",
+    "node-libs-browser": "^0.5.2",
+    "typescript": "^1.5.0-beta",
+    "webpack": "^1.9.11"
+  },
+  "dependencies": {
+    "angular2": "^2.0.0-alpha.28",
+    "reflect-metadata": "^0.1.0",
+    "rtts_assert": "^2.0.0-alpha.28",
+    "rx": "^2.5.3",
+    "zone.js": "^0.5.1"
+  }
+}
