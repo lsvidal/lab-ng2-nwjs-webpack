@@ -2,7 +2,8 @@
 var webpack = require('webpack');
 
 module.exports = {
-	devtool: 'inline-source-map',
+  devtool: 'source-map',
+	//devtool: 'inline-source-map',
 	debug: true,
 	cache: true,
 
@@ -58,13 +59,8 @@ module.exports = {
       // support for .html as raw text
       //{ test: /\.html$/,  loader: 'raw' },
 
-      // Support for .ts files.
-      { test: /^(?!.*(spec|e2e)).*ts$/,    loader: 'typescript-simple-loader', exclude: [
-          /web_modules/,
-          /test/,
-          /node_modules/
-        ]
-      }
+      // Support for .ts and .d.ts files.
+      { test: /\.ts$/,    loader: 'typescript-simple-loader'}
     ],
     noParse: [
       /rtts_assert\/src\/rtts_assert/
