@@ -1,6 +1,8 @@
 
 import {Component, View} from 'angular2/angular2';
 
+import {NameService} from './service/name';
+
 @Component({
 	selector: 'my-app'
 })
@@ -11,6 +13,7 @@ export class MyAppComponent {
 	name: string;
 
 	constructor() {
-		this.name = 'Master';
+		var nameService = new NameService();
+		this.name = nameService.name();
 	}
 }

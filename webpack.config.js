@@ -1,33 +1,16 @@
 
+/*
+	Full configuration for Webpack production build.
+*/
 var webpack = require('webpack');
+var merge = require('merge');
+var config = require('./gulp.config');
 
-module.exports = {
-  devtool: 'source-map',
-	//devtool: 'inline-source-map',
-	debug: true,
-	cache: true,
-
-	entry: {
-		angular2: [
-			'zone.js',
-			// 'zone.js/dist/long-stack-trace-zone.js',
-			'reflect-metadata',
-			'rtts_assert/rtts_assert',
-			'angular2/angular2',
-      'angular2/router',
-      'angular2/di',
-      'angular2/src/facade/browser'
-		],
-		app: [
-		  /*
-      // * include any 3rd party js lib here
-      */
-			'./src/app/bootstrap'
-		]
-	},
+var common = {
+	devtool: 'source-map',
 
 	output: {
-		path: './dist/scripts',
+		path: config.build.scripts,
 		filename: '[name].js',
 		sourceMapFilename: '[name].js.map',
 		chunkFilename: '[id].chunk.js'
@@ -42,23 +25,11 @@ module.exports = {
 			'.json',
 			'.webpack.js',
 			'web.js'
-		],
-		alias: {
-			'app': 'src/bootstrap'
-		}
+		]
 	},
-	
+
 	module: {
     loaders: [
-      // Support for *.json files.
-      //{ test: /\.json$/,  loader: 'json' },
-
-      // Support for CSS as raw text
-      //{ test: /\.css$/,   loader: 'raw' },
-
-      // support for .html as raw text
-      //{ test: /\.html$/,  loader: 'raw' },
-
       // Support for .ts and .d.ts files.
       { test: /\.ts$/,    loader: 'typescript-simple-loader'}
     ],
@@ -67,8 +38,39 @@ module.exports = {
     ]
   },
 
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
+  context: __dirname,
+  stats: { colors: true, reasons: true }
+};
+
+var angular2 = [
+	'zone.js',
+	// 'zone.js/dist/long-stack-trace-zone.js',
+	'reflect-metadata',
+	'rtts_assert/rtts_assert',
+	'angular2/angular2',
+	'angular2/router',
+	'angular2/di',
+	'angular2/src/facade/browser'
+];
+
+var app = [
+	/* 
+	 Include any 3rd party js lib here 
+	*/ 
+	'./src/app/bootstrap'
+];
+
+var prod = {
+	debug: false,
+	cache: false,
+
+	entry: {
+		angular2: angular2,
+		app: app
+	},
+
+	plugins: [
+		new webpack.optimize.CommonsChunkPlugin({
       name: 'angular2',
       minChunks: Infinity,
     }),
@@ -76,23 +78,14 @@ module.exports = {
       name: 'common',
       filename: 'common.js'
     }),
-    /*
-    new webpack.DefinePlugin({
-      'ENV': {
-        'type': JSON.stringify(process.env.NODE_ENV),
-        'debug': true
-      }
-    }),
-*/
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.BannerPlugin(getBanner())
-  ],
 
-  context: __dirname,
-  stats: { colors: true, reasons: true }
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin()
+  ],
 };
 
-function getBanner() {
-  return 'Angular2 Webpack Starter by @gdi2990 from @AngularClass';
-}
+module.exports = {
+	prod: merge(true, true, common, prod),
+	angular2: merge(true, true, common, {debug: true, entry:{angular2: angular2}}),
+	app: merge(true, true, common, {debug:true, entry: {app:app}})
+};
