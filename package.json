@@ -24,8 +24,11 @@
   },
   "homepage": "https://github.com/lsvidal/lab-ng2-nwjs-webpack#readme",
   "devDependencies": {
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
     "gulp-util": "^3.0.6",
-    "traceur": "0.0.90",
+    "merge": "^1.2.0",
+    "require-dir": "^0.3.0",
     "typescript": "^1.5.0-beta",
     "typescript-simple-loader": "^0.3.0",
     "webpack": "^1.10.1"
@@ -35,6 +38,7 @@
     "reflect-metadata": "^0.1.0",
     "rtts_assert": "^2.0.0-alpha.30",
     "rx": "^2.5.1",
+    "traceur": "0.0.90",
     "zone.js": "^0.5.1"
   }
 }
