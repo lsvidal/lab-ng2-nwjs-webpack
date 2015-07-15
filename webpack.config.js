@@ -6,8 +6,28 @@ var webpack = require('webpack');
 var merge = require('merge');
 var config = require('./gulp.config');
 
-var common = {
+var dev = {
+
 	devtool: 'source-map',
+
+	entry: {
+		angular2: [
+			'zone.js',
+			// 'zone.js/dist/long-stack-trace-zone.js',
+			'reflect-metadata',
+			'rtts_assert/rtts_assert',
+			'angular2/angular2',
+			'angular2/router',
+			'angular2/di',
+			'angular2/src/facade/browser'
+		],
+		app: [
+			/* 
+				Include any 3rd party js lib here 
+			*/ 
+			'./src/app/bootstrap'
+		]
+	},
 
 	output: {
 		path: config.build.scripts,
@@ -38,38 +58,7 @@ var common = {
     ]
   },
 
-  context: __dirname,
-  stats: { colors: true, reasons: true }
-};
-
-var angular2 = [
-	'zone.js',
-	// 'zone.js/dist/long-stack-trace-zone.js',
-	'reflect-metadata',
-	'rtts_assert/rtts_assert',
-	'angular2/angular2',
-	'angular2/router',
-	'angular2/di',
-	'angular2/src/facade/browser'
-];
-
-var app = [
-	/* 
-	 Include any 3rd party js lib here 
-	*/ 
-	'./src/app/bootstrap'
-];
-
-var prod = {
-	debug: false,
-	cache: false,
-
-	entry: {
-		angular2: angular2,
-		app: app
-	},
-
-	plugins: [
+ 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin({
       name: 'angular2',
       minChunks: Infinity,
@@ -77,15 +66,22 @@ var prod = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',
       filename: 'common.js'
-    }),
-
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin()
+    })
   ],
+
+  context: __dirname,
+  stats: { colors: true, reasons: true }
 };
 
+var prod = merge(true, true, dev, {debug: false});
+
+prod.plugins = prod.plugins.concat(
+		new webpack.optimize.OccurenceOrderPlugin(),
+		new webpack.optimize.DedupePlugin(),
+		new webpack.optimize.UglifyJsPlugin()
+	);
+
 module.exports = {
-	prod: merge(true, true, common, prod),
-	angular2: merge(true, true, common, {debug: true, entry:{angular2: angular2}}),
-	app: merge(true, true, common, {debug:true, entry: {app:app}})
+	prod: prod,
+	dev: dev
 };

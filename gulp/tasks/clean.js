@@ -9,8 +9,6 @@ var config = require('../../gulp.config');
 
 var webpackConfig = require('../../webpack.config');
 
-console.log(webpackConfig);
-
 gulp.task('clean', function() {
   var del = require('del');
   del(config.build.path, function (err) {

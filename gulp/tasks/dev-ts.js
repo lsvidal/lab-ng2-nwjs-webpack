@@ -6,10 +6,7 @@ var gutil = require('gulp-util');
 var webpack = require('webpack');
 var webpackConfig = require('../../webpack.config');
 
-var conf = Object.create(webpackConfig.app);
-conf.cache = {};
-conf.watch = true;
-var devCompiler = webpack(conf);
+var devCompiler = webpack(webpackConfig.dev);
 
 gulp.task('dev:ts', function() {
 	devCompiler.watch({}, function(err, stats) {

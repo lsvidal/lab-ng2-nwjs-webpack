@@ -1,0 +1,10 @@
+{
+  "name": "lab-ng2-nwjs-webpack",
+  "version": "1.0.0",
+  "main": "index.html",
+  "window": {
+    "width": 800,
+    "height": 600,
+    "toolbar": true
+  }
+}

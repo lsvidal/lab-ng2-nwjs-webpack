@@ -4,12 +4,40 @@
     <link rel="stylesheet" type="text/css" href="styles/main.css" media="screen"/>
   </head>
   <body>
-  
     <!-- The app component created in app.ts -->
-    <my-app>Loading ...</my-app>
+    <my-app>Loading the app ...</my-app>
     <script src="scripts/traceur-runtime.js"></script>
     <script src="scripts/common.js"></script>
     <script src="scripts/angular2.js"></script>
     <script src="scripts/app.js"></script>
+
+    <!-- Reloads the application on content change 
+          ref: https://github.com/nwjs/nw.js/wiki/Livereload-nw.js-on-changes 
+    --> 
+    <script>
+      var gulp = require('gulp');
+
+      gulp.task('reload', function () {
+        console.log('watch activated');
+        if (location) {
+          console.log('Reloading');
+          location.reload();
+        }
+      });
+
+      console.log('Registering watch task');
+      gulp.watch('**/*', ['reload']);
+
+      /*
+        Versão sem Gulp-watch. Não observa os subdiretórios. Pode ser útil quando eu fizer o timestamp do build.
+      var path = './';
+      var fs = require('fs');
+
+      fs.watch(path, function() {
+      if (location)
+        location.reload();
+      });
+      */
+  </script>
   </body>
 </html>

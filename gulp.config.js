@@ -10,7 +10,8 @@ module.exports = {
         path: src,
         ts: src + 'app/**/*.ts',
         styles: src + 'static/styles/**/*.css',
-        html: src + 'static/**/*.html'
+        html: src + 'static/**/*.html',
+        json: src + 'static/**/*.json'
     },
 
     build: {
