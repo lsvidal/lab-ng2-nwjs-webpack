@@ -7,7 +7,7 @@ import {NameService} from './service/name';
 	selector: 'my-app'
 })
 @View({
-	template: '<h1>Hello {{name}}</h1>'
+	template: '<h1>Hello my {{name}}</h1>'
 })
 export class MyAppComponent {
 	name: string;

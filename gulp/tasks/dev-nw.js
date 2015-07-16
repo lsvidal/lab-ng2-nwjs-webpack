@@ -8,7 +8,7 @@ var gulp = require('gulp');
 var nwBuilder = require('nw-builder'); 
 var gutil = require('gulp-util');
 
-gulp.task('nw-run', ['nw-deps'], function () {
+gulp.task('dev:nw', ['watch'], function () {
 
 	var nw = new nwBuilder(config.nwBuild); 
 	nw.on('log', function (msg) {

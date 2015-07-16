@@ -9,15 +9,16 @@ module.exports = {
     src: {
         path: src,
         ts: src + 'app/**/*.ts',
-        styles: src + 'static/styles/**/*.css',
+        css: src + 'static/styles/**/*.css',
         html: src + 'static/**/*.html',
-        json: src + 'static/**/*.json'
+        nw: src + 'static/package.json',
+        lib: ['./node_modules/traceur/bin/traceur-runtime.js']
     },
 
     build: {
         path: build,
         scripts: build + 'scripts/',
-        styles: build + 'styles/',
+        css: build + 'styles/',
         html: build
     },
     
