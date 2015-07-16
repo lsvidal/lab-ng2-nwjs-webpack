@@ -5,7 +5,7 @@
 
 var config = require('../../gulp.config');
 var gulp = require('gulp');
-var nwBuilder = require('node-webkit-builder'); 
+var nwBuilder = require('nw-builder'); 
 var gutil = require('gulp-util');
 
 gulp.task('nw-run', ['nw-deps'], function () {
